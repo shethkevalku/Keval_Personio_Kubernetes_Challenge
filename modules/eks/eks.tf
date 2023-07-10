@@ -135,11 +135,14 @@ data "terraform_remote_state" "eks" {
 #   }
 # }
 
+data "aws_eks_cluster_auth" "example" {
+  name = "personio-eks-cluster"
+}
 
-provider "kubectl" {
+provider "kubernetes" {
   host                   = aws_eks_cluster.personio-eks.endpoint
   cluster_ca_certificate = base64decode(aws_eks_cluster.personio-eks.certificate_authority.0.data)
-  token                  = data.aws_eks_cluster_auth.main.token  
+  token                  = data.aws_eks_cluster_auth.example.token  
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
     command     = "aws"
