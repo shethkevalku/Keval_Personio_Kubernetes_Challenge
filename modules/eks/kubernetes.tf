@@ -1,8 +1,8 @@
 resource "kubernetes_deployment" "app1" {
   metadata {
-    name = "sample-website"
+    name = "hello-website"
     labels = {
-      App = "sample-website"
+      App = "hello-website"
     }
   }
 
@@ -10,19 +10,19 @@ resource "kubernetes_deployment" "app1" {
     replicas = 2
     selector {
       match_labels = {
-        App = "sample-website"
+        App = "hello-website"
       }
     }
     template {
       metadata {
         labels = {
-          App = "sample-website"
+          App = "hello-website"
         }
       }
       spec {
         container {
           image = "328296826261.dkr.ecr.us-east-2.amazonaws.com/personio-ecr:development"
-          name  = "sample-website"
+          name  = "hello-website"
 
           port {
             container_port = 8080
@@ -45,11 +45,11 @@ resource "kubernetes_deployment" "app1" {
 }
 resource "kubernetes_service_v1" "example" {
   metadata {
-    name = "sample-website-service"
+    name = "hello-website-service"
   }
   spec {
     selector = {
-      app = "sample-website"
+      app = "hello-website"
     }
     port {
       protocol    = "TCP"
