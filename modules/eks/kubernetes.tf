@@ -1,8 +1,8 @@
 resource "kubernetes_deployment" "app1" {
   metadata {
-    name = "test-sample-website"
+    name = "sample-website"
     labels = {
-      App = "test-sample-website"
+      App = "sample-website"
     }
   }
 
@@ -10,19 +10,19 @@ resource "kubernetes_deployment" "app1" {
     replicas = 2
     selector {
       match_labels = {
-        App = "test-sample-website"
+        App = "sample-website"
       }
     }
     template {
       metadata {
         labels = {
-          App = "test-sample-website"
+          App = "sample-website"
         }
       }
       spec {
         container {
           image = "328296826261.dkr.ecr.us-east-2.amazonaws.com/personio-ecr:development"
-          name  = "test-sample-website"
+          name  = "sample-website"
 
           port {
             container_port = 8080
@@ -45,16 +45,16 @@ resource "kubernetes_deployment" "app1" {
 }
 resource "kubernetes_service_v1" "example" {
   metadata {
-    name = "test-sample-website-service"
+    name = "sample-website-service"
   }
   spec {
     selector = {
-      app = "test-sample-website"
+      app = "sample-website"
     }
     port {
       protocol    = "TCP"
-      port        = 8080
-      target_port = 80
+      port        = 80
+      target_port = 8080
     }
 
     type = "LoadBalancer"
