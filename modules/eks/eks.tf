@@ -93,18 +93,18 @@ resource "aws_iam_role" "workernodes" {
   depends_on = [
    aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
    aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,
-   #aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
+   aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
   ]
  }
 
 output "cluster_name" {
   value = aws_eks_cluster.personio-eks.name
 }
- # ECR config 
+#  # ECR config 
 
- resource "aws_ecr_repository" "my_ecr_repo" {
-  name = "my-ecr-repo"  
-}
+#  resource "aws_ecr_repository" "my_ecr_repo" {
+#   name = "my-ecr-repo"  
+# }
 
  
 #=====Deploying EKS automatically 
@@ -113,9 +113,9 @@ data "terraform_remote_state" "eks" {
   backend = "s3"
 
   config = {
-    bucket = "personio-keval-tf-state-backend-ci-cd"
+    bucket = "keval-personio-kubernetes-challenge-keval-tf-state"
     key    = "tf-infra/terraform.tfstate"
-    region = "eu-west-1"
+    region = "us-east-2"
   }
 }
 
@@ -128,7 +128,7 @@ provider "kubernetes" {
     args = [
       "eks",
       "get-token",
-      "eu-west-1",
+      "us-east-2",
       "--cluster-name",
       aws_eks_cluster.personio-eks.name
     ]

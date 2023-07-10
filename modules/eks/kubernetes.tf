@@ -21,7 +21,7 @@ resource "kubernetes_deployment" "app1" {
       }
       spec {
         container {
-          image = "328296826261.dkr.ecr.eu-west-1.amazonaws.com/example-service-name:development"
+          image = "328296826261.dkr.ecr.eu-west-1.amazonaws.com/personio-ecr:development"
           name  = "newnewnewsample-website"
 
           port {

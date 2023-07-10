@@ -30,12 +30,13 @@ module "tf-state" {
   bucket_name = "keval-personio-kubernetes-challenge-keval-tf-state"
 }
 
-# module eks-infra {
-#   source = "./modules/eks"
-#     # EKS Input Vars
-#   subnet_id_1 = module.vpc-infra.public_subnets_1.id
-#   subnet_id_2 = module.vpc-infra.public_subnets_2.id
-# }
+module eks-infra {
+  source = "./modules/eks"
+  depends_on = [module.ecr]
+    # EKS Input Vars
+  subnet_id_1 = module.vpc-infra.public_subnets_1.id
+  subnet_id_2 = module.vpc-infra.public_subnets_2.id
+}
 
 module "vpc-infra" {
   source = "./modules/vpc"
@@ -46,7 +47,7 @@ module "vpc-infra" {
   private_subnet_cidrs = local.private_subnet_cidrs
 }
 
-# module "ecr" {
-#   source      = "./modules/ecr"
-# }
+module "ecr" {
+  source      = "./modules/ecr"
+}
 
