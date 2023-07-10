@@ -126,7 +126,7 @@ provider "kubernetes" {
     api_version = "client.authentication.k8s.io/v1beta1"
     command     = "aws"
     args = [
-      "eks",
+      "personio-eks",
       "get-token",
       "us-east-2",
       "--cluster-name",
