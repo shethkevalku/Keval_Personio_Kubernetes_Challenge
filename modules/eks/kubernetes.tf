@@ -25,7 +25,7 @@ resource "kubernetes_deployment" "app1" {
           name  = "test-sample-website"
 
           port {
-            container_port = 80
+            container_port = 8080
           }
 
           resources {
