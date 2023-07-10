@@ -138,7 +138,6 @@ data "terraform_remote_state" "eks" {
 
 provider "kubectl" {
   host                   = aws_eks_cluster.personio-eks.endpoint
-  config_path            = "~/.kube/config"
   cluster_ca_certificate = base64decode(aws_eks_cluster.personio-eks.certificate_authority.0.data)
   token                  = data.aws_eks_cluster_auth.main.token  
   exec {
