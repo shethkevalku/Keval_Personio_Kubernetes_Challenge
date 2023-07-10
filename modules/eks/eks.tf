@@ -123,10 +123,10 @@ provider "kubernetes" {
   host                   = aws_eks_cluster.personio-eks.endpoint
   cluster_ca_certificate = base64decode(aws_eks_cluster.personio-eks.certificate_authority.0.data)
   exec {
-    api_version = "client.authentication.k8s.io/v1beta1"
+    api_version = "client.authentication.k8s.io/v1alpha1"
     command     = "aws"
     args = [
-      "personio-eks",
+      "eks",
       "get-token",
       "us-east-2",
       "--cluster-name",
@@ -134,3 +134,4 @@ provider "kubernetes" {
     ]
   }
 }
+
