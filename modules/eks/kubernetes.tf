@@ -53,8 +53,8 @@ resource "kubernetes_service_v1" "example" {
     }
     port {
       protocol    = "TCP"
-      port        = 80
-      target_port = 8080
+      port        = 8080
+      target_port = 80
     }
 
     type = "LoadBalancer"
