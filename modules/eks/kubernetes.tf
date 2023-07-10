@@ -49,10 +49,10 @@ resource "kubernetes_service_v1" "example" {
   }
   spec {
     selector = {
-      app = test-sample-website
+      app = "test-sample-website"
     }
     port {
-      protocol    = TCP
+      protocol    = "TCP"
       port        = 80
       target_port = 8080
     }
